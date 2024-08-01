@@ -468,9 +468,9 @@ class KITTIArgs():
 
 
         ## Kaggle
-        path_data_save = "/kaggle/working/ai_imu_dr_yformer/data"
-        path_results = "/kaggle/working/ai_imu_dr_yformer/data"
-        path_temp = "/kaggle/working/ai_imu_dr_yformer/temp"
+        path_data_save = "/kaggle/working/YFORMER-AI-IMU-DR/data"
+        path_results = "/kaggle/working/YFORMER-AI-IMU-DR/data"
+        path_temp = "/kaggle/working/YFORMER-AI-IMU-DR/temp"
 
         epochs = 10
         seq_dim = 6000
