@@ -39,20 +39,20 @@ class KITTIParameters(IEKF.Parameters):
     # gravity vector
     g = np.array([0, 0, -9.80655])
 
-    cov_omega = 0
-    cov_acc = 0
-    cov_b_omega = 0
-    cov_b_acc = 0
-    cov_Rot_c_i = 0
-    cov_t_c_i = 0
-    cov_Rot0 = 0
-    cov_v0 = 0
-    cov_b_omega0 = 0
-    cov_b_acc0 = 0
-    cov_Rot_c_i0 = 0
-    cov_t_c_i0 = 0
-    cov_lat = 0
-    cov_up = 0
+    cov_omega = 2e-18
+    cov_acc = 1e-18
+    cov_b_omega = 1e-18
+    cov_b_acc = 1e-18
+    cov_Rot_c_i = 1e-18
+    cov_t_c_i = 1e-18
+    cov_Rot0 = 1e-18
+    cov_v0 = 1e-18
+    cov_b_omega0 = 1e-8
+    cov_b_acc0 = 1e-18
+    cov_Rot_c_i0 = 1e-18
+    cov_t_c_i0 = 1e-18
+    cov_lat = 1e-18
+    cov_up = 10e-18
 
     def __init__(self, **kwargs):
         super(KITTIParameters, self).__init__(**kwargs)
