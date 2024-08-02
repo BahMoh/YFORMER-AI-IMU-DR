@@ -21,11 +21,11 @@ class FullAttention(nn.Module):
         scale = self.scale or 1./sqrt(E)
 
         scores = torch.einsum("blhe,bshe->bhls", queries, keys)
-        if self.mask_flag:
-            if attn_mask is None:
-                attn_mask = TriangularCausalMask(B, L, device=queries.device)
+        # if self.mask_flag:
+        #     if attn_mask is None:
+        #         attn_mask = TriangularCausalMask(B, L, device=queries.device)
 
-            scores.masked_fill_(attn_mask.mask, -np.inf)
+        #     scores.masked_fill_(attn_mask.mask, -np.inf)
 
         A = self.dropout(torch.softmax(scale * scores, dim=-1))
         V = torch.einsum("bhls,bshd->blhd", A, values)
@@ -71,13 +71,13 @@ class ProbAttention(nn.Module):
 
     def _get_initial_context(self, V, L_Q):
         B, H, L_V, D = V.shape
-        if not self.mask_flag:
-            # V_sum = V.sum(dim=-2)
-            V_sum = V.mean(dim=-2)
-            contex = V_sum.unsqueeze(-2).expand(B, H, L_Q, V_sum.shape[-1]).clone()
-        else: # use mask
-            assert(L_Q == L_V) # requires that L_Q == L_V, i.e. for self-attention only
-            contex = V.cumsum(dim=-2)
+        # if not self.mask_flag:
+        #     # V_sum = V.sum(dim=-2)
+        #     V_sum = V.mean(dim=-2)
+        contex = V_sum.unsqueeze(-2).expand(B, H, L_Q, V_sum.shape[-1]).clone()
+        # else: # use mask
+        #     assert(L_Q == L_V) # requires that L_Q == L_V, i.e. for self-attention only
+        #     contex = V.cumsum(dim=-2)
         return contex
 #####################################################################################
     def _update_context(self, context_in, V, scores, index, L_Q, attn_mask):
